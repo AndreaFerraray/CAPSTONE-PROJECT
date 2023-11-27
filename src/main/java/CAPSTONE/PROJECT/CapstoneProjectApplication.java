@@ -1,4 +1,4 @@
-package com.example.CAPSTONE.PROJECT;
+package CAPSTONE.PROJECT;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
