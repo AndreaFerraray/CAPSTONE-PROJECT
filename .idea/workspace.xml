@@ -4,17 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff26f07c-c2e4-462f-9326-8793ad4bb39d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fileComuni/comuni-italiani.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fileComuni/province-italiane.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/exceptions/NotFoundNameException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/repositories/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/UserService.java" afterDir="false" />
+    <list default="true" id="ff26f07c-c2e4-462f-9326-8793ad4bb39d" name="Changes" comment="exception">
+      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/payload/NewUserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/payload/SeccessfullLoginDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/payload/UserLoginDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/EmailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +26,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -63,10 +66,25 @@
       <recent name="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="CAPSTONE.PROJECT.service" />
+      <recent name="CAPSTONE.PROJECT.exceptions" />
       <recent name="CAPSTONE.PROJECT.entities" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.CapstoneProjectApplication">
+    <configuration name="CapstoneProjectApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CAPSTONE.PROJECT.CapstoneProjectApplication" />
+      <module name="CAPSTONE-PROJECT" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="CAPSTONE.PROJECT.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CAPSTONE.PROJECT in CAPSTONE-PROJECT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAPSTONE-PROJECT" />
       <extension name="coverage">
@@ -83,6 +101,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CapstoneProjectApplication" />
         <item itemvalue="JUnit.CAPSTONE.PROJECT in CAPSTONE-PROJECT" />
       </list>
     </recent_temporary>
@@ -96,6 +115,19 @@
       <option name="presentableId" value="Default" />
       <updated>1701075670725</updated>
     </task>
+    <task id="LOCAL-00001" summary="exception">
+      <option name="closed" value="true" />
+      <created>1701095113594</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701095113594</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="exception" />
+    <option name="LAST_COMMIT_MESSAGE" value="exception" />
   </component>
 </project>

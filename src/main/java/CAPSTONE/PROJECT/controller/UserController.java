@@ -4,6 +4,7 @@ import CAPSTONE.PROJECT.entities.User;
 import CAPSTONE.PROJECT.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +31,13 @@ public class UserController {
 @GetMapping("{nome}")
 @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     Page<User> getForName(@PathVariable String nome, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size){
-        return userService.findForName(nome,page,size);
+        return userService.findByNome(nome,page,size);
 }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority('ADMIN')")
+    void findUserByIdAndDelete(@PathVariable long id) {
+        userService.findUserByIdAndDelete(id);}
 
 
 
