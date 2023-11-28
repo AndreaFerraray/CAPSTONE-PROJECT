@@ -9,6 +9,8 @@ import CAPSTONE.PROJECT.exceptions.NotFoundException;
 import CAPSTONE.PROJECT.exceptions.NotFoundNameException;
 import CAPSTONE.PROJECT.payload.NewUserDTO;
 import CAPSTONE.PROJECT.repositories.UserRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,13 +19,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 @Service
 public class UserService {
 
-
+@Autowired
+    Cloudinary cloudinary;
     @Autowired
     PasswordEncoder bcrypt;
     @Autowired
@@ -94,5 +98,12 @@ Pageable pageable = PageRequest.of(page,size);
     public void findUserByIdAndDelete(long id) throws NotFoundException {
         User user= this.findUserById(id);
         userRepository.delete(user);
+    }
+
+    public User uploadPicture(MultipartFile file, long id) throws IOException {
+        User foundUser = this.findUserById(id);
+        String cloudinaryURL = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        foundUser.setImgProfilo(cloudinaryURL);
+        return userRepository.save(foundUser);
     }
 }
