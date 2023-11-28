@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff26f07c-c2e4-462f-9326-8793ad4bb39d" name="Changes" comment="exception">
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/payload/NewUserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/payload/SeccessfullLoginDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/payload/UserLoginDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/EmailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/repositories/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
