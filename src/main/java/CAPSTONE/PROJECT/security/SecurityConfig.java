@@ -38,10 +38,10 @@ public class SecurityConfig {
         http.cors(withDefaults());
 
 
-        //http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 
 
-       // http.addFilterBefore(exceptionHandlerFilter, AuthFilter.class);
+        http.addFilterBefore(exceptionHandlerFilter, AuthFilter.class);
 
         http.authorizeHttpRequests(request -> request.requestMatchers("/**").permitAll());
 
