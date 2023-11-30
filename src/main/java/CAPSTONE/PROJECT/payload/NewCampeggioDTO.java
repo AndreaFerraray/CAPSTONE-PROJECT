@@ -28,7 +28,7 @@ public record NewCampeggioDTO (
         boolean ristorante,
 
 
-        @Min(value = 1, message = "Il numero minimo di stelle è 1")
+        @Min(value = 0, message = "Il numero minimo di stelle è 1")
         @Max(value = 5, message = "Il numero massimo di stelle è 5")
        Integer stelle,
         String logo,
