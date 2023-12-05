@@ -11,6 +11,9 @@ public record NewCampeggioDTO (
 
         Long postiDisp ,
         @NotEmpty(message = "indirizzo obbligatorio")
+        // NUMERO CIVICO E NOME DELLA VIA, STATO, CODICE POSTALE
+        @Pattern(regexp="^\\d+\\s+[\\w\\s]+,\\s*[\\w\\s]+,\\s*[\\w\\s]+,\\s*\\d{5}(-\\d{4})?$\n")
+
         String indirizzo ,
         @NotEmpty(message = "email obbligatoria")
         @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "L'email inserita non è valida")

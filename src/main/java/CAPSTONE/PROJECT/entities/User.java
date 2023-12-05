@@ -1,5 +1,6 @@
 package CAPSTONE.PROJECT.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties({"password", "authorities", "credentialsNonExpired", "accountNonExpired", "accountNonLocked", "enabled"})
 @Table(name = "User")
 public class User implements UserDetails {
 
@@ -36,7 +38,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Campeggio> campeggio= new HashSet<>();
 
 

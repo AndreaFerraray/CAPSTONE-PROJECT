@@ -24,10 +24,9 @@ public record NewUserDTO(
 
         @NotEmpty  (message = "la password è obbligatoria")
         @Size(min=4, message="la password deve avere almeno 4 caratteri")
-        String password,
+        String password
 
-        @NotEmpty  (message = "il numero di telefono è obbligatorio")
-        long tel_number
+
 
 
 
