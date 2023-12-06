@@ -9,10 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -35,6 +32,7 @@ public class User implements UserDetails {
     private long tel_number;
     private String imgProfilo;
 
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -43,7 +41,13 @@ public class User implements UserDetails {
 
 
 
-
+    @ManyToMany
+    @JoinTable(
+            name = "user_campeggio",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "campeggio_id")
+    )
+    private Set<Campeggio> campeggioPreferito = new HashSet<>();
 
 
     @Override
@@ -69,6 +73,17 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+
+
+
+    public void addPreferiti(Campeggio campeggioId) {
+
+    }
+
+    public void addCampeggioPreferito(Campeggio campeggio) {
+        campeggioPreferito.add(campeggio);
     }
 }
 

@@ -33,9 +33,17 @@ public class Campeggio {
 
 
     @ManyToMany
-    @JoinTable(name = "recensioni",
+    @JoinTable(name = "user_campeggio_recensioni",
             joinColumns  = @JoinColumn(name = "campeggio_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
             private Set<User> user= new HashSet<>();
+
+
+    @ManyToMany
+    @JoinTable(name = "preferiti",
+            joinColumns  = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "campeggio_id"))
+            private Set<User> userFavorite = new HashSet<>();
+
 
 }

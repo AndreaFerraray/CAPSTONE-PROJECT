@@ -1,6 +1,6 @@
 package CAPSTONE.PROJECT.service;
 
-import CAPSTONE.PROJECT.controller.AuthController;
+import CAPSTONE.PROJECT.entities.Campeggio;
 import CAPSTONE.PROJECT.entities.Role;
 import CAPSTONE.PROJECT.entities.User;
 import CAPSTONE.PROJECT.exceptions.BadRequestException;
@@ -8,12 +8,13 @@ import CAPSTONE.PROJECT.exceptions.NotFoundException;
 
 import CAPSTONE.PROJECT.exceptions.NotFoundNameException;
 import CAPSTONE.PROJECT.payload.NewUserDTO;
+import CAPSTONE.PROJECT.repositories.CampeggioRepository;
 import CAPSTONE.PROJECT.repositories.UserRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -34,6 +36,8 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     EmailService emailService;
+    @Autowired
+    CampeggioRepository campeggioRepository;
     @Value("${spring.mail.receiver}")
     private String email;
 
@@ -106,4 +110,20 @@ Pageable pageable = PageRequest.of(page,size);
         foundUser.setImgProfilo(cloudinaryURL);
         return userRepository.save(foundUser);
     }
+
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public void addFavorite(User user, Long campeggioId) {
+        User existingUser = userRepository.findById(user.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
+
+        Campeggio campeggio = campeggioRepository.findById(campeggioId)
+                .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
+
+        existingUser.addCampeggioPreferito(campeggio);
+        userRepository.save(existingUser);
+    }
+
 }
