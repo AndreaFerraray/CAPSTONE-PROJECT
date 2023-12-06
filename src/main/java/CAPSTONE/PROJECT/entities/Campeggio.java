@@ -16,6 +16,7 @@ public class Campeggio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String nome;
     private String password;
     private long postiDisp;
     private String indirizzo;

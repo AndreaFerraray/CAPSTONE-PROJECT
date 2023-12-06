@@ -44,7 +44,7 @@ public class CampeggioService {
         campeggio.setPostiDisp(newCampeggioDTO.postiDisp());
         campeggio.setEmail(newCampeggioDTO.email());
         campeggio.setNumeroTelefono(newCampeggioDTO.numeroTelefono());
-
+        campeggio.setNome(newCampeggioDTO.nome());
         campeggio.setCaniAmmessi(newCampeggioDTO.caniAmmessi());
         campeggio.setPiscina(newCampeggioDTO.piscina());
         campeggio.setAnimazione(newCampeggioDTO.animazione());
