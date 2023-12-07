@@ -125,5 +125,16 @@ Pageable pageable = PageRequest.of(page,size);
         existingUser.addCampeggioPreferito(campeggio);
         userRepository.save(existingUser);
     }
+    public void deleteFavorite(User user, Long campeggioId) {
+        User existingUser = userRepository.findById(user.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
+
+        Campeggio campeggio = campeggioRepository.findById(campeggioId)
+                .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
+
+        existingUser.removeCampeggioPreferito(campeggio);
+        userRepository.save(existingUser);
+    }
+
 
 }

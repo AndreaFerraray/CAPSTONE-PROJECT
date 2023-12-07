@@ -43,7 +43,7 @@ public class User implements UserDetails {
 
     @ManyToMany
     @JoinTable(
-            name = "user_campeggio",
+            name = "preferiti",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "campeggio_id")
     )
@@ -78,12 +78,13 @@ public class User implements UserDetails {
 
 
 
-    public void addPreferiti(Campeggio campeggioId) {
-
-    }
 
     public void addCampeggioPreferito(Campeggio campeggio) {
         campeggioPreferito.add(campeggio);
+    }
+
+    public void removeCampeggioPreferito(Campeggio campeggio) {
+        campeggioPreferito.remove(campeggio);
     }
 }
 
