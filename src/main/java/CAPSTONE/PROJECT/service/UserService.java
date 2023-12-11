@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
 @Service
 public class UserService {
@@ -115,7 +114,7 @@ Pageable pageable = PageRequest.of(page,size);
         return userRepository.findByUsername(username);
     }
 
-    public void addFavorite(User user, Long campeggioId) {
+    public User addFavorite(User user, Long campeggioId) {
         User existingUser = userRepository.findById(user.getUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
 
@@ -123,9 +122,9 @@ Pageable pageable = PageRequest.of(page,size);
                 .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
 
         existingUser.addCampeggioPreferito(campeggio);
-        userRepository.save(existingUser);
+        return userRepository.save(existingUser);
     }
-    public void deleteFavorite(User user, Long campeggioId) {
+    public User deleteFavorite(User user, Long campeggioId) {
         User existingUser = userRepository.findById(user.getUserId())
                 .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
 
@@ -133,8 +132,34 @@ Pageable pageable = PageRequest.of(page,size);
                 .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
 
         existingUser.removeCampeggioPreferito(campeggio);
-        userRepository.save(existingUser);
+       return userRepository.save(existingUser);
     }
+
+
+
+    public User addBooking(User user, Long campeggioId) {
+        User existingUser = userRepository.findById(user.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
+
+        Campeggio campeggio = campeggioRepository.findById(campeggioId)
+                .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
+
+        existingUser.addBooking(campeggio);
+        return userRepository.save(existingUser);
+    }
+
+
+    public User deleteOneBooking(User user, Long campeggioId) {
+        User existingUser = userRepository.findById(user.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
+
+        Campeggio campeggio = campeggioRepository.findById(campeggioId)
+                .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
+
+        existingUser.deleteOneBooking(campeggio);
+        return userRepository.save(existingUser);
+    }
+
 
 
 }

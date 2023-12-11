@@ -1,6 +1,7 @@
 package CAPSTONE.PROJECT.controller;
 
 import CAPSTONE.PROJECT.entities.Campeggio;
+import CAPSTONE.PROJECT.exceptions.NotFoundException;
 import CAPSTONE.PROJECT.payload.NewCampeggioDTO;
 import CAPSTONE.PROJECT.service.CampeggioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/campeggi")
 public class CampeggioController {
 @Autowired
 CampeggioService campeggioService;
-
-
 
 
     @GetMapping("")
@@ -35,8 +35,11 @@ CampeggioService campeggioService;
     public Campeggio saveCampeggio(@Validated @RequestBody NewCampeggioDTO newCampeggioDTO ) throws IOException {
         return campeggioService.saveCampeggio(newCampeggioDTO);}
 
-
-
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+    Optional<Campeggio> getCampeggio(@PathVariable long id) {
+        return campeggioService.findCampeggioById(id);
+    }
 
 
 }

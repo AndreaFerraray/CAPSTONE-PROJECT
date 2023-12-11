@@ -2,8 +2,11 @@ package CAPSTONE.PROJECT.controller;
 
 import CAPSTONE.PROJECT.entities.Campeggio;
 import CAPSTONE.PROJECT.entities.User;
+import CAPSTONE.PROJECT.exceptions.BadRequestException;
 import CAPSTONE.PROJECT.exceptions.NotFoundException;
 import CAPSTONE.PROJECT.service.UserService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -70,52 +73,54 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public UserDetails getLoggedProfile(@AuthenticationPrincipal UserDetails loggedUser) {
-        return loggedUser;
+    public UserDetails getLoggedProfile(@AuthenticationPrincipal UserDetails userDetails) {
+
+        return userService.findUserByUsername(userDetails.getUsername());
     }
 
-@PostMapping("/addFavorite")
-public ResponseEntity<String> addFavorite(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
+@PostMapping("/addFavorite/me")
+public User addFavorite(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
     if (userDetails != null) {
         User user = userService.findUserByUsername(userDetails.getUsername());
-        userService.addFavorite(user, campeggioId);
-        return ok("Campeggio aggiunto ai preferiti con successo");
+        return  userService.addFavorite(user, campeggioId);
+
     } else {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Utente non autenticato");
+        throw new BadRequestException("utente non trovato");
     }
 }
 
-@DeleteMapping("/deleteFavorite")
-public ResponseEntity<String> deleteFavorite(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
+@DeleteMapping("/deleteFavorite/me")
+public User deleteFavorite(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
     if (userDetails != null) {
         User user = userService.findUserByUsername(userDetails.getUsername());
-        userService.deleteFavorite(user, campeggioId);
-        return ok("Campeggio eliminato con successo");
+        return   userService.deleteFavorite(user, campeggioId);
+
     } else {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Utente non autenticato");
+        throw  new BadRequestException("utente non trovato");
     }
 }
 
 
-@GetMapping("/favorite")
-public ResponseEntity<Page<Campeggio>>getPreferitiUtente(@AuthenticationPrincipal UserDetails userDetails, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size){
+    @PostMapping("/addBooking/me")
+    public User addBooking(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
+        if (userDetails != null) {
+            User user = userService.findUserByUsername(userDetails.getUsername());
+            return  userService.addBooking(user, campeggioId);
 
-    if (userDetails == null) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);}
-
-    User user = userService.findUserByUsername(userDetails.getUsername());
-        Set<Campeggio> preferiti = user.getCampeggioPreferito();
-       List<Campeggio> preferitiList = new ArrayList<>(preferiti);
-        int start = page * size;
-        int end = Math.min(start + size, preferitiList.size());
-
-
-        List<Campeggio> pageContent = preferitiList.subList(start, end);
-        Page<Campeggio> preferitiPage = new PageImpl<>(pageContent, PageRequest.of(page, size), preferitiList.size());
-
-        return ResponseEntity.ok(preferitiPage);
+        } else {
+            throw new BadRequestException("utente non trovato");
+        }
     }
 
 
+    @DeleteMapping("/deleteOneBooking/me")
+    public User deleteOneBooking(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
+        if (userDetails != null) {
+            User user = userService.findUserByUsername(userDetails.getUsername());
+            return   userService.deleteOneBooking(user, campeggioId);
 
+        } else {
+            throw  new BadRequestException("utente non trovato");
+        }
+    }
 }
