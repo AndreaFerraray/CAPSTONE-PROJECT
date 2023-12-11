@@ -1,5 +1,6 @@
 package CAPSTONE.PROJECT.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -36,8 +37,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Campeggio> campeggio= new HashSet<>();
+    /*@ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Campeggio> campeggio= new HashSet<>();*/
 
 
 
@@ -48,6 +49,15 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "campeggio_id")
     )
     private Set<Campeggio> campeggioPreferito = new HashSet<>();
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "prenotazioni",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "campeggio_id")
+    )
+    private List<Campeggio> prenotazioni = new ArrayList<>();
 
 
     @Override
@@ -85,6 +95,14 @@ public class User implements UserDetails {
 
     public void removeCampeggioPreferito(Campeggio campeggio) {
         campeggioPreferito.remove(campeggio);
+    }
+
+    public void addBooking(Campeggio campeggio) {
+        prenotazioni.add(campeggio);
+    }
+
+    public void deleteOneBooking(Campeggio campeggio) {
+        prenotazioni.remove(campeggio);
     }
 }
 

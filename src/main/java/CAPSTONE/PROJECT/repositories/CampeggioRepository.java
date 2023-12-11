@@ -10,4 +10,6 @@ public interface CampeggioRepository extends JpaRepository <Campeggio, Long> {
     Optional<Campeggio> findByEmail(String email);
 
     Optional<Campeggio> findByIndirizzo(String indirizzo);
+
+    Campeggio findCampeggioById(long id);
 }

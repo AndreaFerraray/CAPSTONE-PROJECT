@@ -3,6 +3,7 @@ package CAPSTONE.PROJECT.service;
 
 import CAPSTONE.PROJECT.entities.Campeggio;
 import CAPSTONE.PROJECT.exceptions.BadRequestException;
+import CAPSTONE.PROJECT.exceptions.NotFoundException;
 import CAPSTONE.PROJECT.payload.NewCampeggioDTO;
 import CAPSTONE.PROJECT.repositories.CampeggioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class CampeggioService {
@@ -57,5 +59,7 @@ public class CampeggioService {
     }
 
 
-
+    public Optional<Campeggio> findCampeggioById(long id) throws NotFoundException {
+        return Optional.ofNullable(campeggioRepository.findCampeggioById(id));
+    }
 }
