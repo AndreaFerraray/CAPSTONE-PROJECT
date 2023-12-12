@@ -1,14 +1,17 @@
 package CAPSTONE.PROJECT.service;
 
 import CAPSTONE.PROJECT.entities.Campeggio;
+import CAPSTONE.PROJECT.entities.Prenotazione;
 import CAPSTONE.PROJECT.entities.Role;
 import CAPSTONE.PROJECT.entities.User;
 import CAPSTONE.PROJECT.exceptions.BadRequestException;
 import CAPSTONE.PROJECT.exceptions.NotFoundException;
 
 import CAPSTONE.PROJECT.exceptions.NotFoundNameException;
+import CAPSTONE.PROJECT.payload.NewPrenotazioneDTO;
 import CAPSTONE.PROJECT.payload.NewUserDTO;
 import CAPSTONE.PROJECT.repositories.CampeggioRepository;
+import CAPSTONE.PROJECT.repositories.PrenotazioneRepository;
 import CAPSTONE.PROJECT.repositories.UserRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -26,6 +29,8 @@ import java.io.IOException;
 
 @Service
 public class UserService {
+    @Autowired
+    PrenotazioneRepository prenotazioneRepository;
 
 @Autowired
     Cloudinary cloudinary;
@@ -137,28 +142,7 @@ Pageable pageable = PageRequest.of(page,size);
 
 
 
-    public User addBooking(User user, Long campeggioId) {
-        User existingUser = userRepository.findById(user.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
 
-        Campeggio campeggio = campeggioRepository.findById(campeggioId)
-                .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
-
-        existingUser.addBooking(campeggio);
-        return userRepository.save(existingUser);
-    }
-
-
-    public User deleteOneBooking(User user, Long campeggioId) {
-        User existingUser = userRepository.findById(user.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
-
-        Campeggio campeggio = campeggioRepository.findById(campeggioId)
-                .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
-
-        existingUser.deleteOneBooking(campeggio);
-        return userRepository.save(existingUser);
-    }
 
 
 

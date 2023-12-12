@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,30 +33,20 @@ public class Campeggio {
     private boolean market;
     private boolean ristorante;
     private long stelle;
-    private String logo;
-
-
-
-   /* @ManyToMany
-    @JsonIgnore
-    @JoinTable(name = "user_campeggio_recensioni",
-            joinColumns  = @JoinColumn(name = "campeggio_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-            private Set<User> user= new HashSet<>();*/
+    private List<String> immagini;
 
 
     @ManyToMany
-@JsonIgnore
+    @JsonIgnore
     @JoinTable(name = "preferiti",
-            joinColumns  = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "campeggio_id"))
-            private Set<User> userFavorite = new HashSet<>();
+    private Set<User> userFavorite = new HashSet<>();
 
-    @ManyToMany
+    @OneToMany(mappedBy = "campeggio")
+    @ToString.Exclude
     @JsonIgnore
-    @JoinTable(name = "prenotazioni",
-            joinColumns  = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "campeggio_id"))
-    private List<User> prenotazioni = new ArrayList<>();
+    private Set<Prenotazione> prenotazione;
+
 
 }

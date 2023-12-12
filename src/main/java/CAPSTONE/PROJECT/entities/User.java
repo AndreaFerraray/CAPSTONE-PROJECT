@@ -37,12 +37,14 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    /*@ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Campeggio> campeggio= new HashSet<>();*/
+
+    @OneToMany(mappedBy = "user")
+    private Set<Prenotazione> prenotazioni;
 
 
 
     @ManyToMany
+
     @JoinTable(
             name = "preferiti",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -51,13 +53,10 @@ public class User implements UserDetails {
     private Set<Campeggio> campeggioPreferito = new HashSet<>();
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "prenotazioni",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "campeggio_id")
-    )
-    private List<Campeggio> prenotazioni = new ArrayList<>();
+
+
+
+
 
 
     @Override
@@ -97,12 +96,17 @@ public class User implements UserDetails {
         campeggioPreferito.remove(campeggio);
     }
 
-    public void addBooking(Campeggio campeggio) {
-        prenotazioni.add(campeggio);
-    }
+
 
     public void deleteOneBooking(Campeggio campeggio) {
         prenotazioni.remove(campeggio);
+    }
+
+    public User addBooking(Prenotazione prenotazione) {
+        this.prenotazioni.add(prenotazione);
+        User user= prenotazione.getUser();
+        System.out.println("bbbbbbbbbb");
+        return user;
     }
 }
 

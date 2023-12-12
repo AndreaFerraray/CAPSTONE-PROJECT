@@ -53,7 +53,7 @@ public class CampeggioService {
         campeggio.setMarket(newCampeggioDTO.market());
         campeggio.setRistorante(newCampeggioDTO.ristorante());
         campeggio.setStelle(newCampeggioDTO.stelle());
-        campeggio.setLogo(newCampeggioDTO.logo());
+        campeggio.setImmagini(newCampeggioDTO.immagini());
         campeggio.setPassword(bcrypt.encode(newCampeggioDTO.password()));
         return campeggioRepository.save(campeggio);
     }

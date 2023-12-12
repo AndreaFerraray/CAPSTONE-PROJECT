@@ -5,6 +5,8 @@ package CAPSTONE.PROJECT.payload;
 
 import jakarta.validation.constraints.*;
 
+import java.util.List;
+
 public record NewCampeggioDTO (
 
 
@@ -16,6 +18,7 @@ public record NewCampeggioDTO (
 
         String indirizzo ,
         String nome,
+        List <String> immagini,
         @NotEmpty(message = "email obbligatoria")
         @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "L'email inserita non è valida")
         String email,
@@ -42,5 +45,6 @@ public record NewCampeggioDTO (
         String password
 
 ){ public  NewCampeggioDTO{}
+
 
 }

@@ -4,6 +4,8 @@ import CAPSTONE.PROJECT.entities.Campeggio;
 import CAPSTONE.PROJECT.entities.User;
 import CAPSTONE.PROJECT.exceptions.BadRequestException;
 import CAPSTONE.PROJECT.exceptions.NotFoundException;
+import CAPSTONE.PROJECT.payload.NewPrenotazioneDTO;
+import CAPSTONE.PROJECT.service.CampeggioService;
 import CAPSTONE.PROJECT.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.transaction.Transactional;
@@ -22,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -29,6 +32,8 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    @Autowired
+    CampeggioService campeggioService;
 
     @Autowired
     UserService userService;
@@ -101,26 +106,4 @@ public User deleteFavorite(@AuthenticationPrincipal UserDetails userDetails, @Re
 }
 
 
-    @PostMapping("/addBooking/me")
-    public User addBooking(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
-        if (userDetails != null) {
-            User user = userService.findUserByUsername(userDetails.getUsername());
-            return  userService.addBooking(user, campeggioId);
-
-        } else {
-            throw new BadRequestException("utente non trovato");
-        }
-    }
-
-
-    @DeleteMapping("/deleteOneBooking/me")
-    public User deleteOneBooking(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
-        if (userDetails != null) {
-            User user = userService.findUserByUsername(userDetails.getUsername());
-            return   userService.deleteOneBooking(user, campeggioId);
-
-        } else {
-            throw  new BadRequestException("utente non trovato");
-        }
-    }
 }
