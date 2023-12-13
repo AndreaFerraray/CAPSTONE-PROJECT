@@ -36,6 +36,7 @@ public class Campeggio {
     private List<String> immagini;
 
 
+
     @ManyToMany
     @JsonIgnore
     @JoinTable(name = "preferiti",

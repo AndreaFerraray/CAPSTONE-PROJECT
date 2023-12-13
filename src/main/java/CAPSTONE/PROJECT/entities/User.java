@@ -105,8 +105,13 @@ public class User implements UserDetails {
     public User addBooking(Prenotazione prenotazione) {
         this.prenotazioni.add(prenotazione);
         User user= prenotazione.getUser();
+
         System.out.println("bbbbbbbbbb");
         return user;
+    }
+
+    public Long getId() {
+        return userId;
     }
 }
 

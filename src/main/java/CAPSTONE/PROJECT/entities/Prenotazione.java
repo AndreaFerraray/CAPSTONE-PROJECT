@@ -1,6 +1,5 @@
 package CAPSTONE.PROJECT.entities;
 
-import CAPSTONE.PROJECT.repositories.PrenotazioneRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -32,15 +30,16 @@ public class Prenotazione {
 
     @Column(name = "data_prenotazione")
     private Date dataPrenotazione;
-    @Column(name = "data_check-in")
+    @Column(name = "data_check_in")
     private Date data_check_in;
     @Column(name = "data_check_out")
     private Date data_check_out;
 
     @Column(name = "ospiti")
     private Long ospiti;
-    @Column(name = "notti")
-    private Long notti;
+
+    @Column(name="cani")
+    private boolean cani;
 
 
 

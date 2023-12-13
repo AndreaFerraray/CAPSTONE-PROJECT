@@ -13,10 +13,9 @@ public record NewCampeggioDTO (
 
         Long postiDisp ,
         @NotEmpty(message = "indirizzo obbligatorio")
-        // NUMERO CIVICO E NOME DELLA VIA, STATO, CODICE POSTALE
-        //@Pattern(regexp="^\\d+\\s+[\\w\\s]+,\\s*[\\w\\s]+,\\s*[\\w\\s]+,\\s*\\d{5}(-\\d{4})?$\n")
-
-        String indirizzo ,
+                /*[Numero civico] [Nome della via], [Città], [Provincia], [CAP], [Paese]*/
+        @Pattern(regexp="^[0-9]+ [a-zA-Z\s]+, [a-zA-Z\s]+, [a-zA-Z\s]+, [0-9]{5}, [a-zA-Z\s]+$")
+                String indirizzo ,
         String nome,
         List <String> immagini,
         @NotEmpty(message = "email obbligatoria")
