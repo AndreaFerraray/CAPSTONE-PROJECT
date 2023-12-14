@@ -49,5 +49,8 @@ public class Campeggio {
     @JsonIgnore
     private Set<Prenotazione> prenotazione;
 
+    @OneToMany(mappedBy ="campeggioSistemazione")
+    @JsonIgnore
+    private List<TipoSistemazione> tipoSistemazione = new ArrayList<>();
 
 }

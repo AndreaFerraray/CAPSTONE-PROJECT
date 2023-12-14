@@ -37,7 +37,7 @@ public class CampeggioService {
 
 
     public Campeggio saveCampeggio(NewCampeggioDTO newCampeggioDTO) throws IOException {
-        System.out.println("SIAMO AI CANI AMMMESSSIIISISISIS");
+
         campeggioRepository.findByEmail(newCampeggioDTO.email()).ifPresent(campeggio ->{
             throw new BadRequestException("La mail "+ campeggio.getEmail() + " è già presente! ");
         });
