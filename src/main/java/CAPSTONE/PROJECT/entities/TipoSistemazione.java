@@ -1,8 +1,11 @@
 package CAPSTONE.PROJECT.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,6 +28,10 @@ public class TipoSistemazione {
     @ManyToOne
     @JoinColumn(name = "campeggio_id")
     private Campeggio campeggioSistemazione;
+
+    @OneToMany(mappedBy = "tipoSistemazione")
+    @JsonIgnore
+    private List<Prenotazione> prenotazioni;
 
     public TipoSistemazione() {
     }

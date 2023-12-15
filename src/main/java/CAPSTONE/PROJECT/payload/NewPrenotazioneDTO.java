@@ -1,6 +1,7 @@
 package CAPSTONE.PROJECT.payload;
 
 import CAPSTONE.PROJECT.entities.Campeggio;
+import CAPSTONE.PROJECT.entities.TipoSistemazione;
 import CAPSTONE.PROJECT.entities.User;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -27,7 +28,9 @@ public record NewPrenotazioneDTO (
                                   @NotNull
                                   Boolean cani,
                                   @NotNull
-                                  Long costoTotale
+                                  Long costoTotale,
+                                  @NotNull
+                                  Long tipoSistemazioneId
 
                                   ){
 public NewPrenotazioneDTO{}

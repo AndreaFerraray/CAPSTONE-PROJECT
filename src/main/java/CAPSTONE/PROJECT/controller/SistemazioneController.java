@@ -17,9 +17,9 @@ public class SistemazioneController {
     @Autowired
     TipoSistemazioneService tipoSistemazioneService;
 
-    @GetMapping("")
+    @GetMapping("/{campeggio_id}")
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-    public List<TipoSistemazione> getSistemazioni(@RequestBody Long campeggio_id){
+    public List<TipoSistemazione> getSistemazioni(@PathVariable Long campeggio_id){
         return tipoSistemazioneService.getTipoSistemazioneByCampeggio(campeggio_id);
     }
 @PostMapping("")

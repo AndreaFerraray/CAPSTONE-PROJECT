@@ -2,12 +2,14 @@ package CAPSTONE.PROJECT.service;
 
 import CAPSTONE.PROJECT.entities.Campeggio;
 import CAPSTONE.PROJECT.entities.Prenotazione;
+import CAPSTONE.PROJECT.entities.TipoSistemazione;
 import CAPSTONE.PROJECT.entities.User;
 import CAPSTONE.PROJECT.exceptions.NoMoreAvailableSpotsException;
 import CAPSTONE.PROJECT.exceptions.NotFoundException;
 import CAPSTONE.PROJECT.payload.NewPrenotazioneDTO;
 import CAPSTONE.PROJECT.repositories.CampeggioRepository;
 import CAPSTONE.PROJECT.repositories.PrenotazioneRepository;
+import CAPSTONE.PROJECT.repositories.TipoSistemazioneRepository;
 import CAPSTONE.PROJECT.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PrenotazioniService {
@@ -29,6 +32,8 @@ public class PrenotazioniService {
     CampeggioRepository campeggioRepository;
     @Autowired
     private PrenotazioneRepository prenotazioneRepository;
+    @Autowired
+    private TipoSistemazioneRepository tipoSistemazioneRepository;
 
 
     public User addBooking(User user, NewPrenotazioneDTO newPrenotazioneDTO) throws NoMoreAvailableSpotsException {
@@ -38,7 +43,8 @@ public class PrenotazioniService {
         Campeggio campeggio = campeggioRepository.findById(newPrenotazioneDTO.campeggioId())
                 .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
 
-
+       TipoSistemazione tipoSistemazione=tipoSistemazioneRepository.findById(newPrenotazioneDTO.tipoSistemazioneId())
+               .orElseThrow(() -> new EntityNotFoundException("sistemazione non trovata"));;
 
 
         Prenotazione prenotazione = new Prenotazione();
@@ -49,8 +55,9 @@ public class PrenotazioniService {
         prenotazione.setData_check_out(newPrenotazioneDTO.data_check_out());
         prenotazione.setOspiti(newPrenotazioneDTO.ospiti());
          prenotazione.setCani(newPrenotazioneDTO.cani());
+         prenotazione.setTipoSistemazione(tipoSistemazione);
 
-        System.out.println("Data ricevuta: " + newPrenotazioneDTO.data_check_in());
+        System.out.println((newPrenotazioneDTO.tipoSistemazioneId()));
 
         System.out.println("aaaaaaaaa");
         prenotazioneRepository.save(prenotazione);

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TipoSistemazioneRepository extends JpaRepository <TipoSistemazione, Long> {
-    List<TipoSistemazione> getAllById(Long campeggioId);
+    List<TipoSistemazione> getAllById(Long campeggio_id);
 
     Optional<Object> findByNomeSistemazione(String nomeSistemazione);
 }

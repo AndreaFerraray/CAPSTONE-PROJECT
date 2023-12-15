@@ -41,6 +41,8 @@ public class Prenotazione {
     @Column(name="cani")
     private boolean cani;
 
-
+    @ManyToOne
+    @JoinColumn(name = "tipo_sistemazione_id")
+    private TipoSistemazione tipoSistemazione;
 
 }
