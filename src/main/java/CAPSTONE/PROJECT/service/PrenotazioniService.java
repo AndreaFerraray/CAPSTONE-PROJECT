@@ -76,20 +76,19 @@ public class PrenotazioniService {
         }
     }
 
+    public void findByIdAndDelete(long prenotazioneId) {
 
-  /*  public boolean isUserAlreadyBooked(Long id_utente, Date dataCheckIn, Date dataCheckOut, Long id_campeggio) {
-        List<Prenotazione> prenotazioniUtente = prenotazioneRepository.findByUserAndDateRange(id_utente, dataCheckIn, dataCheckOut,id_campeggio);
-        return !prenotazioniUtente.isEmpty();
-    }*/
+Prenotazione prenotazione= this.findPrenotazioneById(prenotazioneId);
+prenotazioneRepository.delete(prenotazione);
 
-/*    public User deleteOneBooking(User user, Long campeggioId) {
-        User existingUser = userRepository.findById(user.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
+    }
 
-        Campeggio campeggio = campeggioRepository.findById(campeggioId)
-                .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
 
-        existingUser.deleteOneBooking(campeggio);
-        return userRepository.save(existingUser);
-    }*/
+
+    public Prenotazione findPrenotazioneById(long id) {
+        return  prenotazioneRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
+    }
+
+
+
 }

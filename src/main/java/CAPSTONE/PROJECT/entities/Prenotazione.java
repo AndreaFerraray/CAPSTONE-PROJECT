@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -29,11 +30,11 @@ public class Prenotazione {
     private Campeggio campeggio;
 
     @Column(name = "data_prenotazione")
-    private Date dataPrenotazione;
+    private LocalDate dataPrenotazione;
     @Column(name = "data_check_in")
-    private Date data_check_in;
+    private LocalDate data_check_in;
     @Column(name = "data_check_out")
-    private Date data_check_out;
+    private LocalDate data_check_out;
 
     @Column(name = "ospiti")
     private Long ospiti;

@@ -17,11 +17,11 @@ public record NewPrenotazioneDTO (
                                   @NotNull
                                   Long campeggioId ,
 
-                                  Date dataPrenotazione,
+                                  LocalDate dataPrenotazione,
                                   @NotNull
-                                  Date data_check_in,
+                                  LocalDate data_check_in,
                                   @NotNull
-                                  Date data_check_out,
+                                  LocalDate data_check_out,
                                   @Min(value = 0, message = "Il numero minimo di ospiti è 1")
                                   @Max(value = 5, message = "Il numero massimo di ospiti è 4")
                                   Long ospiti,
