@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,12 @@ public class PrenotazioniService {
        TipoSistemazione tipoSistemazione=tipoSistemazioneRepository.findById(newPrenotazioneDTO.tipoSistemazioneId())
                .orElseThrow(() -> new EntityNotFoundException("sistemazione non trovata"));;
 
+        long numeroNotti = ChronoUnit.DAYS.between(newPrenotazioneDTO.data_check_in(),newPrenotazioneDTO.data_check_out());
+
+        long tariffaGiornaliera = tipoSistemazione.getPrezzoNotte();
+
+        long costoTotale= numeroNotti * tariffaGiornaliera;
+        System.out.println(costoTotale);
 
         Prenotazione prenotazione = new Prenotazione();
         prenotazione.setUser(user);
@@ -56,6 +63,7 @@ public class PrenotazioniService {
         prenotazione.setOspiti(newPrenotazioneDTO.ospiti());
          prenotazione.setCani(newPrenotazioneDTO.cani());
          prenotazione.setTipoSistemazione(tipoSistemazione);
+         prenotazione.setCostoTotale(costoTotale);
 
         System.out.println((newPrenotazioneDTO.tipoSistemazioneId()));
 
@@ -75,6 +83,8 @@ public class PrenotazioniService {
 
         }
     }
+
+
 
     public void findByIdAndDelete(long prenotazioneId) {
 

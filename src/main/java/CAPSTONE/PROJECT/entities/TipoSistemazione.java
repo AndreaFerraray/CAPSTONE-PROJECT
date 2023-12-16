@@ -18,7 +18,7 @@ public class TipoSistemazione {
 
     private String nomeSistemazione;
     private Long personeAmmesse;
-    private Long prezzoNotte;
+    public Long prezzoNotte;
     private Boolean areaCondizionata;
     private Boolean frigo;
     private Boolean bagnoPrivato;

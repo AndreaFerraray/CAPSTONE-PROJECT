@@ -38,11 +38,7 @@ public List<Prenotazione> getUserPrenotazioni(@AuthenticationPrincipal UserDetai
 }
     @PostMapping("/addBooking/me")
     public User addBooking(@AuthenticationPrincipal UserDetails userDetails, @RequestBody NewPrenotazioneDTO newPrenotazioneDTO, Campeggio campeggio) throws NoMoreAvailableSpotsException {
-        /*User user = userService.findUserByUsername(userDetails.getUsername());
-        Long userId = user.getId();
-        if (prenotazioniService.isUserAlreadyBooked(userId, newPrenotazioneDTO.data_check_in(), newPrenotazioneDTO.data_check_out(), campeggio.getId())) {
-            throw new BadRequestException("L'utente ha già prenotato per le date selezionate");
-        }*/
+
 
         if (newPrenotazioneDTO.data_check_in() == null || newPrenotazioneDTO.data_check_out() == null) {
             throw new BadRequestException("Le date di check-in e check-out devono essere specificate");
@@ -62,29 +58,6 @@ public List<Prenotazione> getUserPrenotazioni(@AuthenticationPrincipal UserDetai
     }
 
 
-/*
-   @DeleteMapping("/deleteOneBooking/me/{prenotazioneId}")
-   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-    public void deleteOneBooking(@AuthenticationPrincipal UserDetails userDetails, @PathVariable long prenotazioneId){
-        if (userDetails != null) {
-            User user = userService.findUserByUsername(userDetails.getUsername());
-            Prenotazione prenotazione = prenotazioniService.findPrenotazioneById(prenotazioneId);
-if(prenotazione != null && prenotazione.getUser().equals(user)) {
-
-     prenotazioniService.findByIdAndDelete( prenotazioneId);
-
-
-}else {
-    throw new UnauthorizedException("Non sei autorizzato a eliminare questa prenotazione");
-}
-        } else {
-            throw  new BadRequestException("utente non trovato");
-        }
-    }
-*/
-
-
 
 
 
@@ -98,10 +71,8 @@ if(prenotazione != null && prenotazione.getUser().equals(user)) {
 
             if (prenotazione != null && prenotazione.getUser().equals(user)) {
                 prenotazioniService.findByIdAndDelete(prenotazioneId);
-
-                // Ritorna lo user aggiornato dopo la cancellazione
                 User updatedUser = userService.findUserByUsername(userDetails.getUsername());
-                System.out.println(updatedUser);
+
                 return ResponseEntity.ok(updatedUser);
             } else {
                 throw new UnauthorizedException("Non sei autorizzato a eliminare questa prenotazione");
