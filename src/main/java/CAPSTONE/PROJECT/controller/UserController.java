@@ -1,11 +1,13 @@
 package CAPSTONE.PROJECT.controller;
 
 import CAPSTONE.PROJECT.entities.Campeggio;
+import CAPSTONE.PROJECT.entities.PostUser;
 import CAPSTONE.PROJECT.entities.User;
 import CAPSTONE.PROJECT.exceptions.BadRequestException;
 import CAPSTONE.PROJECT.exceptions.NotFoundException;
 import CAPSTONE.PROJECT.payload.NewPostDTO;
 import CAPSTONE.PROJECT.payload.NewPrenotazioneDTO;
+import CAPSTONE.PROJECT.repositories.UserRepository;
 import CAPSTONE.PROJECT.service.CampeggioService;
 import CAPSTONE.PROJECT.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,6 +40,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("")
@@ -125,6 +129,18 @@ public User deleteFavorite(@AuthenticationPrincipal UserDetails userDetails, @Re
         throw  new BadRequestException("utente non trovato");
     }
 }
+
+
+@GetMapping("getPost/me/{user_id}")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+public Page <PostUser> getPostUser (@AuthenticationPrincipal UserDetails userDetails, @RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "10") int size,
+                                    @RequestParam(defaultValue = "id") String orderBy) {
+User user = userRepository.findByUsername(userDetails.getUsername());
+/*long user_id= user.getUserId();*/
+   return userService.getPostUser(user,page,size, orderBy);
+}
+
 
 @DeleteMapping("deletePost/me/{post_id}")
 @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
