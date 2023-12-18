@@ -42,19 +42,16 @@ public class User implements UserDetails {
     private Set<Prenotazione> prenotazioni;
 
 
+@OneToMany(mappedBy = "userPost")
+private List<PostUser> post;
 
     @ManyToMany
-
     @JoinTable(
             name = "preferiti",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "campeggio_id")
     )
     private Set<Campeggio> campeggioPreferito = new HashSet<>();
-
-
-
-
 
 
 
@@ -105,13 +102,20 @@ public class User implements UserDetails {
     public User addBooking(Prenotazione prenotazione) {
         this.prenotazioni.add(prenotazione);
         User user= prenotazione.getUser();
-
-        System.out.println("bbbbbbbbbb");
         return user;
     }
-
+    public User addPostUser(PostUser post) {
+        this.post.add(post);
+        User user = post.getUserPost();
+        return user;
+    }
     public Long getId() {
         return userId;
+    }
+
+    public void removePostUser(PostUser post) {
+        this.post.remove(post);
+        post.setUserPost(null);
     }
 }
 

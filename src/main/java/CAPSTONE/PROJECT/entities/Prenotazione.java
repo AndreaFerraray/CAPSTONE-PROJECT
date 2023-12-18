@@ -20,14 +20,7 @@ public class Prenotazione {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "user_id")
-    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "campeggio_id")
-    private Campeggio campeggio;
 
     @Column(name = "data_prenotazione")
     private LocalDate dataPrenotazione;
@@ -49,4 +42,14 @@ public class Prenotazione {
     @JoinColumn(name = "tipo_sistemazione_id")
     private TipoSistemazione tipoSistemazione;
 
+
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "campeggio_id")
+    private Campeggio campeggio;
 }

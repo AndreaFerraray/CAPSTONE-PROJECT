@@ -65,9 +65,6 @@ public class PrenotazioniService {
          prenotazione.setTipoSistemazione(tipoSistemazione);
          prenotazione.setCostoTotale(costoTotale);
 
-        System.out.println((newPrenotazioneDTO.tipoSistemazioneId()));
-
-        System.out.println("aaaaaaaaa");
         prenotazioneRepository.save(prenotazione);
 
         return existingUser.addBooking(prenotazione);

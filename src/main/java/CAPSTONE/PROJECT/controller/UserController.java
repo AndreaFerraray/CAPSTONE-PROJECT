@@ -4,6 +4,7 @@ import CAPSTONE.PROJECT.entities.Campeggio;
 import CAPSTONE.PROJECT.entities.User;
 import CAPSTONE.PROJECT.exceptions.BadRequestException;
 import CAPSTONE.PROJECT.exceptions.NotFoundException;
+import CAPSTONE.PROJECT.payload.NewPostDTO;
 import CAPSTONE.PROJECT.payload.NewPrenotazioneDTO;
 import CAPSTONE.PROJECT.service.CampeggioService;
 import CAPSTONE.PROJECT.service.UserService;
@@ -78,12 +79,14 @@ public class UserController {
     }
 
     @GetMapping("/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public UserDetails getLoggedProfile(@AuthenticationPrincipal UserDetails userDetails) {
 
         return userService.findUserByUsername(userDetails.getUsername());
     }
 
 @PostMapping("/addFavorite/me")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 public User addFavorite(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
     if (userDetails != null) {
         User user = userService.findUserByUsername(userDetails.getUsername());
@@ -94,7 +97,11 @@ public User addFavorite(@AuthenticationPrincipal UserDetails userDetails, @Reque
     }
 }
 
+
+
 @DeleteMapping("/deleteFavorite/me")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+@ResponseStatus(HttpStatus.NO_CONTENT)
 public User deleteFavorite(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
     if (userDetails != null) {
         User user = userService.findUserByUsername(userDetails.getUsername());
@@ -107,5 +114,30 @@ public User deleteFavorite(@AuthenticationPrincipal UserDetails userDetails, @Re
 
 
 
+@PatchMapping("addPost/me")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public User addPost (@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute NewPostDTO newPostDTO) throws IOException {
+
+        if (userDetails != null) {
+        User user = userService.findUserByUsername(userDetails.getUsername());
+        return userService.addPost(user, newPostDTO);
+    } else {
+        throw  new BadRequestException("utente non trovato");
+    }
+}
+
+@DeleteMapping("deletePost/me/{post_id}")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+@ResponseStatus(HttpStatus.NO_CONTENT)
+    public User deletePost(@AuthenticationPrincipal UserDetails userDetails, @PathVariable long post_id){
+    if (userDetails != null) {
+        User user = userService.findUserByUsername(userDetails.getUsername());
+        return   userService.deletePost(user, post_id);
+
+    } else {
+        throw  new BadRequestException("utente non trovato");
+    }
+}
 
 }
+
