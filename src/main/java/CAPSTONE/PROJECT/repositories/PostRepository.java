@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PostRepository extends JpaRepository<PostUser,Long> {
 
-    @Query("SELECT p FROM PostUser p WHERE p.userPost = :user_id")
-    Page<PostUser> findByUserId(@Param("PostUser") User user_id, Pageable pageable);
+   /* @Query("SELECT p FROM PostUser p WHERE p.userPost = :user_id")
+    Page<User> findByUserId(@Param("PostUser") User user_id, Pageable pageable);*/
 
 }

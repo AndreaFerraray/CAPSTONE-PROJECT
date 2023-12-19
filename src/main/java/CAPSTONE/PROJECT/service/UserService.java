@@ -29,6 +29,8 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -156,13 +158,14 @@ Pageable pageable = PageRequest.of(page,size);
     }
 
 
-    public User addPost(User user , NewPostDTO newPostDTO) throws IOException {
+    public User addPost(User user , NewPostDTO newPostDTO, LocalDate currentDate) throws IOException {
         String cloudinaryURL = (String) cloudinary.uploader().upload(newPostDTO.file().getBytes(), ObjectUtils.emptyMap()).get("url");
 
             PostUser post = new PostUser();
             post.setUserPost(user);
             post.setTesto(newPostDTO.testo());
             post.setFoto(cloudinaryURL);
+            post.setDataPubblicazione(currentDate);
 
             postRepository.save(post);
             return user.addPostUser(post);
@@ -180,8 +183,5 @@ Pageable pageable = PageRequest.of(page,size);
         return userRepository.save(existingUser);
     }
 
-    public Page<PostUser> getPostUser(User user, int page, int size, String orderBy) {
-      Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
-        return postRepository.findByUserId(user,pageable);
-    }
+
 }

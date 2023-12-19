@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -124,28 +126,21 @@ public User deleteFavorite(@AuthenticationPrincipal UserDetails userDetails, @Re
 
         if (userDetails != null) {
         User user = userService.findUserByUsername(userDetails.getUsername());
-        return userService.addPost(user, newPostDTO);
+            LocalDate currentDate = LocalDate.now();
+
+        return userService.addPost(user, newPostDTO, currentDate);
     } else {
         throw  new BadRequestException("utente non trovato");
     }
 }
 
 
-@GetMapping("getPost/me/{user_id}")
-@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-public Page <PostUser> getPostUser (@AuthenticationPrincipal UserDetails userDetails, @RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "10") int size,
-                                    @RequestParam(defaultValue = "id") String orderBy) {
-User user = userRepository.findByUsername(userDetails.getUsername());
-/*long user_id= user.getUserId();*/
-   return userService.getPostUser(user,page,size, orderBy);
-}
+
 
 
 @DeleteMapping("deletePost/me/{post_id}")
 @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-@ResponseStatus(HttpStatus.NO_CONTENT)
-    public User deletePost(@AuthenticationPrincipal UserDetails userDetails, @PathVariable long post_id){
+public User deletePost(@AuthenticationPrincipal UserDetails userDetails, @PathVariable long post_id){
     if (userDetails != null) {
         User user = userService.findUserByUsername(userDetails.getUsername());
         return   userService.deletePost(user, post_id);
