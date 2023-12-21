@@ -34,6 +34,12 @@ CampeggioService campeggioService;
                                     @RequestParam(defaultValue = "id") String orderBy){
         return campeggioService.getCampeggi(page,size, orderBy);
     }
+/*    @GetMapping("filter")
+    Page <Campeggio> getCampeggiFiltrati( @RequestParam String luogo,  @RequestParam boolean caniAmmessi, @RequestParam boolean piscina, @RequestParam boolean animazione, @RequestParam boolean market, @RequestParam boolean ristorante, @RequestParam long stelle  @RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "10") int size,
+                                         @RequestParam(defaultValue = "id") String orderBy){
+        return campeggioService
+    }*/
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -60,5 +66,9 @@ CampeggioService campeggioService;
             return ResponseEntity.ok(campeggi);
         }
     }
-
+@DeleteMapping("/delete/{id}")
+@ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletecamping(@PathVariable long id){
+         campeggioService.deleteCampeggio(id);
+}
 }

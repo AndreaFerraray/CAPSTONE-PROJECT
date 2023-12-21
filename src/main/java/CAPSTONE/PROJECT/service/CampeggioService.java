@@ -57,7 +57,9 @@ public class CampeggioService {
         campeggio.setMarket(newCampeggioDTO.market());
         campeggio.setRistorante(newCampeggioDTO.ristorante());
         campeggio.setStelle(newCampeggioDTO.stelle());
+        campeggio.setLogo(newCampeggioDTO.logo());
         campeggio.setImmagini(newCampeggioDTO.immagini());
+        /*campeggio.setImmagini(newCampeggioDTO.immagini());*/
         campeggio.setPassword(bcrypt.encode(newCampeggioDTO.password()));
         return campeggioRepository.save(campeggio);
     }
@@ -67,20 +69,10 @@ public class CampeggioService {
         return Optional.ofNullable(campeggioRepository.findCampeggioById(id));
     }
 
-  /*  public void decrementaPostiDisponibili(Long campeggioId, Long ospiti) throws NoMoreAvailableSpotsException {
-        Campeggio campeggio = campeggioRepository.findById(campeggioId)
-                .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
-
-
-        if (campeggio.getPostiDisp() > 0) {
-            if(ospiti != null){
-            campeggio.setPostiDisp(campeggio.getPostiDisp() - ospiti);
-            campeggioRepository.save(campeggio);}
-            else{ throw new RuntimeException("ospiti null");
-            }
-        } else {
-            throw new NoMoreAvailableSpotsException("Nessun posto disponibile nel campeggio");
-        }
+    public void deleteCampeggio(long id) {
+        Campeggio campeggio = campeggioRepository.findCampeggioById(id);
+          campeggioRepository.delete(campeggio);
     }
-*/
+
+
 }

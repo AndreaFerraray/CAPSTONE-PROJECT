@@ -3,6 +3,7 @@ package CAPSTONE.PROJECT.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,6 +26,8 @@ public class Campeggio {
     private long postiDisp;
     private String indirizzo;
     private String email;
+    @Column(length = 5000)
+    @Size(max = 5000)
     private String descrizione;
     private long numeroTelefono;
     private boolean caniAmmessi;
@@ -33,9 +36,13 @@ public class Campeggio {
     private boolean market;
     private boolean ristorante;
     private long stelle;
-    private List<String> immagini;
+    private String logo;
+    private List <String> immagini;
 
 
+
+    @OneToMany(mappedBy = "campeggio")
+    private List <FotoCampeggio> foto;
 
     @ManyToMany
     @JsonIgnore

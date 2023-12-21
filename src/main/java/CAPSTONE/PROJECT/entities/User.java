@@ -43,6 +43,7 @@ public class User implements UserDetails {
 
 
 @OneToMany(mappedBy = "userPost")
+@JsonIgnoreProperties("userPost")
 private List<PostUser> post;
 
     @ManyToMany

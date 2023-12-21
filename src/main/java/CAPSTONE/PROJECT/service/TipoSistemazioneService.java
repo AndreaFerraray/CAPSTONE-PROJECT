@@ -27,9 +27,8 @@ public class TipoSistemazioneService {
         Campeggio campeggio = campeggioRepository.findCampeggioById(newSistemazioneDTO.campeggio_id());
 
         if (campeggio != null) {
-            tipoSistemazioneRepository.findByNomeSistemazione(newSistemazioneDTO.nomeSistemazione()).ifPresent(tipoSistemazione -> {
-                throw new BadRequestException("la sistemazione è gia associata al campeggio con id" + newSistemazioneDTO.nomeSistemazione());
-            });
+
+
             TipoSistemazione tipoSistemazione = new TipoSistemazione();
             tipoSistemazione.setCampeggioSistemazione(campeggio);
             tipoSistemazione.setNomeSistemazione(newSistemazioneDTO.nomeSistemazione());

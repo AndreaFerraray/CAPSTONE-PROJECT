@@ -1,6 +1,8 @@
 package CAPSTONE.PROJECT.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,15 +15,16 @@ import java.time.LocalDate;
 public class PostUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
-    private long postId;
+    @Column(name = "id")
+    private long id;
     private String testo ;
     private String foto;
     private LocalDate dataPubblicazione;
 
+
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "user_id")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
     private User userPost;
 
 

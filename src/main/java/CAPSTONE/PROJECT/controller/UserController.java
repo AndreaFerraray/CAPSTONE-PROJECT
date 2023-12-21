@@ -9,6 +9,7 @@ import CAPSTONE.PROJECT.payload.NewPostDTO;
 import CAPSTONE.PROJECT.payload.NewPrenotazioneDTO;
 import CAPSTONE.PROJECT.repositories.UserRepository;
 import CAPSTONE.PROJECT.service.CampeggioService;
+import CAPSTONE.PROJECT.service.PostUserService;
 import CAPSTONE.PROJECT.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.transaction.Transactional;
@@ -37,6 +38,8 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    @Autowired
+    PostUserService postUserService;
     @Autowired
     CampeggioService campeggioService;
 
@@ -148,7 +151,14 @@ public User deletePost(@AuthenticationPrincipal UserDetails userDetails, @PathVa
     } else {
         throw  new BadRequestException("utente non trovato");
     }
-}
+};
+
+    @GetMapping("/post")
+    Page<PostUser> getAllPost(@RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "10") int size,
+                              @RequestParam(defaultValue = "id") String orderBy){
+        return postUserService.getAllPost(page,size,orderBy);
+    }
 
 }
 
