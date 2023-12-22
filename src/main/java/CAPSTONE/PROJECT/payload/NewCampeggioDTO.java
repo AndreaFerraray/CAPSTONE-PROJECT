@@ -36,6 +36,7 @@ public record NewCampeggioDTO (
         boolean animazione,
 
         boolean market,
+        boolean wifi,
 
         boolean ristorante,
 

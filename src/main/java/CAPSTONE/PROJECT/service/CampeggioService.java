@@ -57,6 +57,7 @@ public class CampeggioService {
         campeggio.setMarket(newCampeggioDTO.market());
         campeggio.setRistorante(newCampeggioDTO.ristorante());
         campeggio.setStelle(newCampeggioDTO.stelle());
+        campeggio.setWifi(newCampeggioDTO.wifi());
         campeggio.setLogo(newCampeggioDTO.logo());
         campeggio.setImmagini(newCampeggioDTO.immagini());
         /*campeggio.setImmagini(newCampeggioDTO.immagini());*/

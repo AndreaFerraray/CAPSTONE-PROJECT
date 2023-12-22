@@ -66,9 +66,29 @@ CampeggioService campeggioService;
             return ResponseEntity.ok(campeggi);
         }
     }
+    @GetMapping("/cerca/")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+    public ResponseEntity<?> findByIndirizzoAndFilters(@RequestParam(required = false) String indirizzo,
+                                                     @RequestParam(required = false, defaultValue = "false") Boolean wifi,
+                                                     @RequestParam(required = false, defaultValue = "false") Boolean animaliAmmessi,
+                                                     @RequestParam(required = false, defaultValue = "false") Boolean piscina,
+                                                     @RequestParam(required = false, defaultValue = "false") Boolean animazione,
+                                                     @RequestParam(required = false, defaultValue = "false") Boolean market,
+                                                     @RequestParam(required = false, defaultValue = "false") Boolean ristorante) throws IOException {
+        List<Campeggio> campeggi = campeggioRepository.findByFilters(indirizzo, wifi, animaliAmmessi, piscina, animazione, market,ristorante);
+        System.out.println(indirizzo);
+        if (campeggi.isEmpty()) {
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nessun campeggio trovato");
+        } else {
+
+            return ResponseEntity.ok(campeggi);
+        }
+    }
 @DeleteMapping("/delete/{id}")
 @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletecamping(@PathVariable long id){
          campeggioService.deleteCampeggio(id);
 }
 }
+

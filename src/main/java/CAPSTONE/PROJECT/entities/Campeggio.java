@@ -28,6 +28,7 @@ public class Campeggio {
     private String email;
     @Column(length = 5000)
     @Size(max = 5000)
+    private Boolean wifi;
     private String descrizione;
     private long numeroTelefono;
     private boolean caniAmmessi;
