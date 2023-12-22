@@ -18,6 +18,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +39,12 @@ public List<Prenotazione> getUserPrenotazioni(@AuthenticationPrincipal UserDetai
 }
     @PostMapping("/addBooking/me")
     public User addBooking(@AuthenticationPrincipal UserDetails userDetails, @RequestBody NewPrenotazioneDTO newPrenotazioneDTO, Campeggio campeggio) throws NoMoreAvailableSpotsException {
+        LocalDate dataCheckIn = newPrenotazioneDTO.data_check_in();
+        LocalDate currentDate = LocalDate.now();
 
+        if (dataCheckIn == null || currentDate == null || dataCheckIn.isBefore(currentDate)) {
+            throw new BadRequestException("La data di check-in non può essere passata o nulla");
+        }
 
         if (newPrenotazioneDTO.data_check_in() == null || newPrenotazioneDTO.data_check_out() == null) {
             throw new BadRequestException("Le date di check-in e check-out devono essere specificate");
