@@ -28,7 +28,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        // 1. Verifico se c'è l'header Authorization
+
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new UnauthorizedException("Inserire token in Authorization Header");
@@ -37,18 +37,10 @@ public class AuthFilter extends OncePerRequestFilter {
             String token = authHeader.substring(7);
 
             jwtTools.verifyToken(token);
-
-
             String id = jwtTools.idFromToken(token);
-
-
             User foundUser = userService.findUserById(Integer.parseInt(id));
-
-
             Authentication authentication = new UsernamePasswordAuthenticationToken(foundUser, null, foundUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
-
             filterChain.doFilter(request, response);
         }
     }
