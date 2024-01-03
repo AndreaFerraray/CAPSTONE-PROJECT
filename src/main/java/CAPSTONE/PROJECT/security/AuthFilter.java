@@ -33,22 +33,22 @@ public class AuthFilter extends OncePerRequestFilter {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new UnauthorizedException("Inserire token in Authorization Header");
         } else {
-            // Estraggo il token da Auth Header
+
             String token = authHeader.substring(7);
-            System.out.println("IL TOKEN --> " + token);
+
             jwtTools.verifyToken(token);
 
-            //Estraggo user id dal Token
+
             String id = jwtTools.idFromToken(token);
 
-            //Cerco User in db
+
             User foundUser = userService.findUserById(Integer.parseInt(id));
 
-            //Autorizzo lo user a procedere
+
             Authentication authentication = new UsernamePasswordAuthenticationToken(foundUser, null, foundUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            //Procedere verso il prossimo blocco della filter chain
+
             filterChain.doFilter(request, response);
         }
     }

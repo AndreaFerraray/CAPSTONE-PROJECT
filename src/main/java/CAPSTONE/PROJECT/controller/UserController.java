@@ -154,6 +154,7 @@ public User deletePost(@AuthenticationPrincipal UserDetails userDetails, @PathVa
 };
 
     @GetMapping("/post")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     Page<PostUser> getAllPost(@RequestParam(defaultValue = "0") int page,
                               @RequestParam(defaultValue = "10") int size,
                               @RequestParam(defaultValue = "id") String orderBy){
