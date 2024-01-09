@@ -39,5 +39,6 @@ public interface CampeggioRepository extends JpaRepository <Campeggio, Long> {
             @Param("animazione") Boolean animazione,
             @Param("market") Boolean market,
             @Param("ristorante") Boolean ristorante);
+
 }
 
