@@ -53,7 +53,7 @@ CampeggioService campeggioService;
         return campeggioService.findCampeggioById(id);
     }
 
-    @GetMapping("/cerca/{indirizzo}")
+/*    @GetMapping("/cerca/{indirizzo}")
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<?> getCampeggioByIndirizzo(@PathVariable String indirizzo) throws IOException {
         List<Campeggio> campeggi = campeggioRepository.findByIndirizzoContaining(indirizzo);
@@ -65,24 +65,37 @@ CampeggioService campeggioService;
 
             return ResponseEntity.ok(campeggi);
         }
-    }
+    }*/
     @GetMapping("/cerca/")
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<?> findByIndirizzoAndFilters(@RequestParam(required = false) String indirizzo,
-                                                     @RequestParam(required = false, defaultValue = "false") Boolean wifi,
-                                                     @RequestParam(required = false, defaultValue = "false") Boolean animaliAmmessi,
-                                                     @RequestParam(required = false, defaultValue = "false") Boolean piscina,
-                                                     @RequestParam(required = false, defaultValue = "false") Boolean animazione,
-                                                     @RequestParam(required = false, defaultValue = "false") Boolean market,
-                                                     @RequestParam(required = false, defaultValue = "false") Boolean ristorante) throws IOException {
-        List<Campeggio> campeggi = campeggioRepository.findByFilters(indirizzo, wifi, animaliAmmessi, piscina, animazione, market,ristorante);
-        System.out.println(indirizzo);
-        if (campeggi.isEmpty()) {
+                                                     @RequestParam(required = false) Boolean wifi,
+                                                     @RequestParam(required = false) Boolean animaliAmmessi,
+                                                     @RequestParam(required = false) Boolean piscina,
+                                                     @RequestParam(required = false) Boolean animazione,
+                                                     @RequestParam(required = false) Boolean market,
+                                                     @RequestParam(required = false) Boolean ristorante) throws IOException {
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nessun campeggio trovato");
+        if (!wifi && !animaliAmmessi && !piscina && !animazione && !market && !ristorante) {
+            List<Campeggio> campeggiByIndirizzo = campeggioRepository.findByIndirizzoContaining(indirizzo);
+
+            if (campeggiByIndirizzo.isEmpty()) {
+                System.out.println("Nessun campeggio trovato");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nessun campeggio trovato");
+            } else {
+                System.out.println("Campeggi trovati con indirizzo: " + campeggiByIndirizzo.size());
+                return ResponseEntity.ok(campeggiByIndirizzo);
+            }
         } else {
-
-            return ResponseEntity.ok(campeggi);
+            System.out.println(wifi);
+            List<Campeggio> campeggi = campeggioRepository.findByFilters(indirizzo, wifi, animaliAmmessi, piscina, animazione, market,ristorante);
+            if (campeggi.isEmpty()) {
+                System.out.println("Nessun campeggio trovato");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nessun campeggio trovato");
+            } else {
+                System.out.println("Campeggi trovati con filtri: " + campeggi.size());
+                return ResponseEntity.ok(campeggi);
+            }
         }
     }
 @DeleteMapping("/delete/{id}")
