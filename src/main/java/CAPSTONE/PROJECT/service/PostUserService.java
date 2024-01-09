@@ -21,5 +21,6 @@ public class PostUserService {
     public Page<PostUser> getAllPost (int page, int size, String orderBy){
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
         return postRepository.findAll(pageable);
+
     }
 }
