@@ -19,7 +19,7 @@ public class TipoSistemazioneService {
     private CampeggioRepository campeggioRepository;
 
     public List<TipoSistemazione> getTipoSistemazioneByCampeggio(Long campeggio_id) {
-        return tipoSistemazioneRepository.getAllById(campeggio_id);
+        return tipoSistemazioneRepository.getAllByIdCampeggio(campeggio_id);
     }
 
 

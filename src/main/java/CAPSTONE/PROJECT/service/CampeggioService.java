@@ -60,7 +60,7 @@ public class CampeggioService {
         campeggio.setWifi(newCampeggioDTO.wifi());
         campeggio.setLogo(newCampeggioDTO.logo());
         campeggio.setImmagini(newCampeggioDTO.immagini());
-        /*campeggio.setImmagini(newCampeggioDTO.immagini());*/
+
         campeggio.setPassword(bcrypt.encode(newCampeggioDTO.password()));
         return campeggioRepository.save(campeggio);
     }
