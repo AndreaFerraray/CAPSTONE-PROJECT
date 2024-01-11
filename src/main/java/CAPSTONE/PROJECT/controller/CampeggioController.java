@@ -34,12 +34,6 @@ CampeggioService campeggioService;
                                     @RequestParam(defaultValue = "id") String orderBy){
         return campeggioService.getCampeggi(page,size, orderBy);
     }
-/*    @GetMapping("filter")
-    Page <Campeggio> getCampeggiFiltrati( @RequestParam String luogo,  @RequestParam boolean caniAmmessi, @RequestParam boolean piscina, @RequestParam boolean animazione, @RequestParam boolean market, @RequestParam boolean ristorante, @RequestParam long stelle  @RequestParam(defaultValue = "0") int page,
-                                         @RequestParam(defaultValue = "10") int size,
-                                         @RequestParam(defaultValue = "id") String orderBy){
-        return campeggioService
-    }*/
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -53,19 +47,7 @@ CampeggioService campeggioService;
         return campeggioService.findCampeggioById(id);
     }
 
-/*    @GetMapping("/cerca/{indirizzo}")
-    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-    public ResponseEntity<?> getCampeggioByIndirizzo(@PathVariable String indirizzo) throws IOException {
-        List<Campeggio> campeggi = campeggioRepository.findByIndirizzoContaining(indirizzo);
 
-        if (campeggi.isEmpty()) {
-
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nessun campeggio trovato");
-        } else {
-
-            return ResponseEntity.ok(campeggi);
-        }
-    }*/
     @GetMapping("/cerca/")
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<?> findByIndirizzoAndFilters(@RequestParam(required = false) String indirizzo,
