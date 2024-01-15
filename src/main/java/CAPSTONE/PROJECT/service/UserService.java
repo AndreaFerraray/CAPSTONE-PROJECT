@@ -147,6 +147,7 @@ Pageable pageable = PageRequest.of(page,size);
                 .orElseThrow(() -> new EntityNotFoundException("Campeggio non trovato"));
 
         existingUser.removeCampeggioPreferito(campeggio);
+        System.out.println(existingUser);
        return userRepository.save(existingUser);
     }
 
