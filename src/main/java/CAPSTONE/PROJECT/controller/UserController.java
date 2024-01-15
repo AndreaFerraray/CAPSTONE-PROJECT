@@ -108,10 +108,10 @@ public User addFavorite(@AuthenticationPrincipal UserDetails userDetails, @Reque
 
 
 
-@DeleteMapping("/deleteFavorite/me")
+@DeleteMapping("/deleteFavorite/me/{campeggioId}")
 @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-@ResponseStatus(HttpStatus.NO_CONTENT)
-public User deleteFavorite(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Long campeggioId){
+
+public User deleteFavorite(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long campeggioId){
     if (userDetails != null) {
         User user = userService.findUserByUsername(userDetails.getUsername());
         return   userService.deleteFavorite(user, campeggioId);
