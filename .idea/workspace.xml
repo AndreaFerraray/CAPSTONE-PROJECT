@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff26f07c-c2e4-462f-9326-8793ad4bb39d" name="Changes" comment="exception">
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/controller/CampeggioController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/Recensioni.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/payload/NewCampeggioDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/repositories/CampeggioRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/service/CampeggioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/Campeggio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/Campeggio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CAPSTONE/PROJECT/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +25,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
@@ -48,11 +48,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.CapstoneProjectApplication.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "V-0.1",
-    "last_opened_file_path": "/Users/andreaferrara/Desktop/EPICODE/BACK-END/CAPSTONE-PROJECT/CAPSTONE-PROJECT/src/main/java/CAPSTONE/PROJECT",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/andreaferrara/Desktop/PERSONAL CODING/EPICODE/BACK-END/CAPSTONE-PROJECT",
     "run.code.analysis.last.selected.profile": "pProject Default"
   }
 }]]></component>
@@ -104,6 +106,13 @@
         <item itemvalue="JUnit.CAPSTONE.PROJECT in CAPSTONE-PROJECT" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
