@@ -70,7 +70,7 @@ public class UserService {
         newUser.setEmail(newUserDTO.email());
         newUser.setPassword(bcrypt.encode(newUserDTO.password()));
         newUser.setImgProfilo("https://ui-avatars.com/api/?name=" + newUserDTO.nome() + "+" + newUserDTO.cognome());
-        emailService.sendEmail(email, "account creato correttamente", "benvenuto " + newUser.getUsername() + " il tuo account e' stato creato con successo");
+//        emailService.sendEmail(email, "account creato correttamente", "benvenuto " + newUser.getUsername() + " il tuo account e' stato creato con successo");
         return userRepository.save(newUser);
     }
 
